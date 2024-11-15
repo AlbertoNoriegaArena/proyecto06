@@ -43,8 +43,7 @@ public class CalculadoraTest {
 
     @Test
     public void testSumarUnNumero() {
-        // Hacemos una suma primero para que ultimoResultado tenga un valor diferente a
-        // 0
+        // Hacemos una suma primero para que ultimoResultado tenga un valor diferente a 0
         calculadora.sumar(1.1); // ultimoResultado vale 1.1
         calculadora.sumar(3.3); // ultimoResultado ahora vale 4.4
         assertEquals(4.4, calculadora.getUltimoResultado(), DELTA, "El resultado debe ser 4.4");
@@ -72,9 +71,21 @@ public class CalculadoraTest {
     }
 
     @Test
+    public void  testFactorialNoRecursivo(){
+        calculadora.factorialNoRecursivo(5);
+        assertEquals(120, calculadora.getUltimoResultado());
+    }
+
+    @Test
     public void testBorrarResultado() {
         calculadora.sumar(10);
         calculadora.borrarResultado();
         assertEquals(0.0, calculadora.getUltimoResultado(), "El resultado debe ser 0 después de reiniciar");
+    }
+
+    @Test
+    public void testFactorialRecursivo() {
+        long resultado = calculadora.factorialRecursivo(6);
+        assertEquals(720, resultado);
     }
 }

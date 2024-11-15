@@ -61,6 +61,22 @@ public class Calculadora {
       return this.ultimoResultado;
    }
 
+   public void factorialNoRecursivo( long numero){
+      long resultado = 1;
+      for (int i = 1; i<=numero; i++) {
+         resultado *= i;
+      }
+      this.ultimoResultado = resultado;
+   }
+
+   public long factorialRecursivo(long numero) {
+      // En 1 tiene que parar
+      if (numero <= 1) {
+          return 1;
+      }
+      return numero * factorialRecursivo(numero - 1);
+  }
+
    // Método para reiniciar el resultado acumulado a cero (Botón C calculadora)
    public void borrarResultado() {
       this.ultimoResultado = 0;
