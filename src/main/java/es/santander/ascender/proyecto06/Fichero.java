@@ -13,13 +13,22 @@ public class Fichero {
         int valor;
 
         FileInputStream fis = new FileInputStream(nombreFichero);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // Se compara con -1 porque los bits van de 0 a 255 asi que cuando ya no tiene
-        // más byte en -1 sale del bucle
-        while ((valor = fis.read()) != -1) {
-            baos.write(valor);
+        ByteArrayOutputStream baos = null; // Declaras la variable para que funcione el codigo despues del catch
+        try{
+            baos = new ByteArrayOutputStream();
+            // Se compara con -1 porque los bits van de 0 a 255 asi que cuando ya no tiene
+            // más byte en -1 sale del bucle
+            while ((valor = fis.read()) != -1) {
+                baos.write(valor);
+            }
+            fis.close();
+            baos.close(); // Normalmemnte suelen ser objetos temporales así que no es del todo necesario hacerlo
         }
-        fis.close();
+        catch (IOException ioe){
+            fis.close();
+            baos.close();
+        }
+      
         return baos.toByteArray();
     }
 
