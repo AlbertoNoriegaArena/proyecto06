@@ -19,6 +19,7 @@ public class Fichero {
         while ((valor = fis.read()) != -1) {
             baos.write(valor);
         }
+        fis.close();
         return baos.toByteArray();
     }
 
