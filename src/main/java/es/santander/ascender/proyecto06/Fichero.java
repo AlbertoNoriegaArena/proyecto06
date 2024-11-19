@@ -48,6 +48,13 @@ public abstract class Fichero implements Closeable{
     }
 
     // necesito que pase el tamaño a escribir y el nombre de fichero
+    public void escribir(String nombreFichero, byte[] datos) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(nombreFichero);) {
+            fos.write(datos);
+        }
+    }
+
+    
     @Override
     public void close() throws IOException {
         // TODO Auto-generated method stub
