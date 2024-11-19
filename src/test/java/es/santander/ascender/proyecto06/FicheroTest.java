@@ -1,10 +1,12 @@
 package es.santander.ascender.proyecto06;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -63,8 +65,23 @@ public class FicheroTest {
     }
 
     @Test
-    void testLeerEnBloques() {
-        // Fichero de recursos
+    void testLeerEnBloques() throws IOException {
+
+        //Creo un archivo temporal con contenido conocido
+        String contenido = "Texto de prueba";
+        File archivoTemporal = File.createTempFile("FicheroDePrueba", ".txt");
+        archivoTemporal.deleteOnExit();
+
+        try (FileOutputStream fos = new FileOutputStream(archivoTemporal)) {
+            fos.write(contenido.getBytes());
+        }
+
+        // Leer el archivo 
+        byte[] resultado = cut.leerEnBloques(archivoTemporal.getAbsolutePath());
+
+        // Comparar el contenido esperado con el resultado obtenido
+        byte[] contenidoEsperado = contenido.getBytes();
+        assertArrayEquals(contenidoEsperado, resultado, "El contenido leído no coincide con el esperado.");
     }
 
     // Creamos una clase inner (en el mismo fichero del test) para poder instanciar objetos ya que Fichero es una clase abstracta
