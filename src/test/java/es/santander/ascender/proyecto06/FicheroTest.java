@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class FicheroTest {
 
-    Fichero cut = new FicheroTesting();
+    private Fichero cut;
 
     // @BeforeAll => Lo hace una sola vez y hace los test
     // IMPORTANTE: Si queremos usar BeforeAll el metodo setUp tiene que ser static para que no de error
@@ -28,8 +28,9 @@ public class FicheroTest {
     @BeforeEach
     public void setUp() {
 
+        
         // Opción 1: Crear una instancia de la subclase FicheroTesting, que extiende de Fichero
-        Fichero fichero = new FicheroTesting();
+        cut = new FicheroTesting();
 
         // Opción 2: Crear una instancia anónima de Fichero sobre la marcha
         // Generamos una clase sobre la marcha para crear el objeto. Una vez creado el objeto, la clase se pierde
